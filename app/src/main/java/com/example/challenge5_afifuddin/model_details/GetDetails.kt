@@ -1,9 +1,9 @@
-package com.example.challenge5_afifuddin.model
+package com.example.challenge5_afifuddin.model_details
 
 
 import com.google.gson.annotations.SerializedName
 
-data class GetAllMoviesResponse(
+data class GetDetails(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

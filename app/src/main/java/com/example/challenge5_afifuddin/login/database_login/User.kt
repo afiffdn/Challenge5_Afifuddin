@@ -16,6 +16,6 @@ data class User(
     @ColumnInfo(name = "password") var password: String,
     @ColumnInfo(name = "repassword") var repassword : String,
     @ColumnInfo(name = "nama_lengkap") var namaLengkap:String?,
-    @ColumnInfo(name = "tanggal_lahir") var tanggalLahir:Date?,
+    @ColumnInfo(name = "tanggal_lahir") var tanggalLahir:String?,
     @ColumnInfo(name = "alamat") var alamat:String?
 ) :Parcelable
