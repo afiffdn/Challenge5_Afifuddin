@@ -23,4 +23,9 @@
     <string name="detail">Detail</string>
     <string name="judul_film">Judul Film</string>
     <string name="tanggal">tanggal</string>
+    <string name="_2000">(2000)</string>
+    <string name="jargon">jargon</string>
+    <string name="overview">Overview</string>
+    <string name="_0">0%</string>
+    <string name="user_score">User\nScore</string>
 </resources>

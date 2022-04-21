@@ -15,11 +15,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var binding: ActivityRegisterBinding
+    lateinit var binding:ActivityRegisterBinding
     var dB: Database? = null
 
     companion object {
-        const val EMAIL = "email"
+        const val FILE = "kotlinsharedpreferences"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +46,9 @@ class RegisterActivity : AppCompatActivity() {
                 repassword.isEmpty() -> {
                     binding.etRepassword.error = " input repassword"
                 }
+                password.lowercase() != repassword.lowercase() ->{
+                    Toast.makeText(this, "wrong repassword", Toast.LENGTH_SHORT).show()
+                }
                 else -> {
                     register()
                 }
@@ -61,14 +64,15 @@ class RegisterActivity : AppCompatActivity() {
         val password = binding.etPassword.text.toString()
         val repassword = binding.etRepassword.text.toString()
         val obejctUser = User(null, username, email, password, repassword,null,null,null)
-        val preferences = this.getSharedPreferences(EMAIL, Context.MODE_PRIVATE)
+        val preferences = this.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
         lifecycleScope.launch(Dispatchers.IO) {
             val result = dB?.user()?.insertUser(obejctUser)
             runBlocking(Dispatchers.Main) {
                 if (result != 0.toLong()) {
                     val editor: SharedPreferences.Editor = preferences.edit()
-                    editor.putString(EMAIL, email)
+                    editor.putString("email", email)
+                    editor.putString("username",username)
                     editor.apply()
                     Toast.makeText(
                         this@RegisterActivity,

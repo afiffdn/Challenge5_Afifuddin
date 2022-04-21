@@ -51,6 +51,7 @@ class NowMovieShowingAdapter(private val onItemCLick: onClickListener) :
         }
     }
 
+
     interface onClickListener {
         fun onClickItem(data: Result)
 
