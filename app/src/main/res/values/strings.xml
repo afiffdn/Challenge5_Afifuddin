@@ -13,7 +13,7 @@
     <string name="reinput_password">Reinput Password</string>
     <string name="input_username">Input Username</string>
     <string name="input_email">Input Email</string>
-    <string name="welcome_username">Welcome, Username</string>
+    <string name="welcome_username">Welcome, %s</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="username_profile">Username</string>
@@ -28,4 +28,8 @@
     <string name="overview">Overview</string>
     <string name="_0">0%</string>
     <string name="user_score">User\nScore</string>
+    <string name="now_showing">Now Showing</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="new_password">new_password</string>
+    <string name="new_email">new_email</string>
 </resources>

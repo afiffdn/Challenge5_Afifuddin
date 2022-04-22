@@ -11,10 +11,10 @@ import java.util.*
 @Entity
 data class User(
     @PrimaryKey(autoGenerate = true) var id_user: Int?,
-    @ColumnInfo(name = "username") var username:String,
-    @ColumnInfo(name = "email") var email: String,
-    @ColumnInfo(name = "password") var password: String,
-    @ColumnInfo(name = "repassword") var repassword : String,
+    @ColumnInfo(name = "username") var username:String?,
+    @ColumnInfo(name = "email") var email: String?,
+    @ColumnInfo(name = "password") var password: String?,
+    @ColumnInfo(name = "repassword") var repassword : String?,
     @ColumnInfo(name = "nama_lengkap") var namaLengkap:String?,
     @ColumnInfo(name = "tanggal_lahir") var tanggalLahir:String?,
     @ColumnInfo(name = "alamat") var alamat:String?

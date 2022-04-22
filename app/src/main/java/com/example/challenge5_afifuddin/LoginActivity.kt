@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     private var dB: Database? = null
     companion object {
-        const val FILE = "email"
+        const val EMAIL = "email"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -63,10 +63,14 @@ class LoginActivity : AppCompatActivity() {
     private fun chechUser() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
+        val preferences = this.getSharedPreferences(EMAIL, Context.MODE_PRIVATE)
         lifecycleScope.launch(Dispatchers.IO) {
             val login = dB?.user()?.checkUser(email, password)
             runBlocking(Dispatchers.Main) {
                 if (login == true) {
+                    val editor : SharedPreferences.Editor = preferences.edit()
+                    editor.putString("email",email)
+                    editor.apply()
                     Toast.makeText(this@LoginActivity, "Login Sukses", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
 

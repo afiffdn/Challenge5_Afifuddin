@@ -11,7 +11,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        val preferences = this.getSharedPreferences(RegisterActivity.FILE, Context.MODE_PRIVATE)
+        val preferences = this.getSharedPreferences(LoginActivity.EMAIL, Context.MODE_PRIVATE)
         val email = preferences.getString("email","default")
         if (email != "default"){
             Handler().postDelayed({
