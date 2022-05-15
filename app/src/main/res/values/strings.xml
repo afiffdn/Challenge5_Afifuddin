@@ -30,6 +30,6 @@
     <string name="user_score">User\nScore</string>
     <string name="now_showing">Now Showing</string>
     <string name="top_rated">Top Rated</string>
-    <string name="new_password">new_password</string>
-    <string name="new_email">new_email</string>
+    <string name="new_password">new password</string>
+    <string name="new_email">new email</string>
 </resources>

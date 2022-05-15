@@ -7,14 +7,18 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.challenge5_afifuddin.adapter.NowMovieShowingAdapter
 import com.example.challenge5_afifuddin.adapter.TopRatedAdapter
 import com.example.challenge5_afifuddin.api.ApiClient
 import com.example.challenge5_afifuddin.databinding.ActivityMainBinding
+import com.example.challenge5_afifuddin.datastore.DatastoreManager
 import com.example.challenge5_afifuddin.login.database_login.Database
 import com.example.challenge5_afifuddin.model_movies_now_showing.GetAllMovieNowShowing
 import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 import com.example.challenge5_afifuddin.model_movies_top_rated.GetTopRated
+import com.example.challenge5_afifuddin.viewmodel.MainViewModel
+import com.example.challenge5_afifuddin.viewmodel.ViewModelFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,22 +26,23 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var dB: Database? = null
-    private lateinit var preferences: SharedPreferences
-
+    lateinit var mainViewModel: MainViewModel
+    lateinit var datastore: DatastoreManager
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        datastore = DatastoreManager(this)
+        mainViewModel = ViewModelProvider(this, ViewModelFactory(datastore))[MainViewModel::class.java]
+        dB = Database.getInstance(this)
+        mainViewModel.getData().observe(this){
+            binding.tvWelcome.text = getString(R.string.welcome_username, it.username)
+        }
 
-     //   mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-     //   dB = Database.getInstance(this)
-
-
-        preferences = this.getSharedPreferences(RegisterActivity.FILE,Context.MODE_PRIVATE)
-        binding.tvWelcome.text = "Hello, ${preferences.getString("username","default_user")}"
-
+        //   mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //   dB = Database.getInstance(this)
 
 
 //        mainViewModel.dataUser.observe(this) {
@@ -50,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         fetchDataAllNowPlaying()
         fetchDataTopRated()
         binding.ivUser.setOnClickListener {
-            startActivity(Intent(this, UserActivity::class.java))
+           startActivity(Intent(this, UserActivity::class.java))
         }
 
     }

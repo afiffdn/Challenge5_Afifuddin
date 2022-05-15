@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityRegisterBinding
+import com.example.challenge5_afifuddin.datastore.DatastoreManager
 import com.example.challenge5_afifuddin.login.database_login.Database
 import com.example.challenge5_afifuddin.login.database_login.User
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +19,6 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var binding:ActivityRegisterBinding
     var dB: Database? = null
 
-    companion object {
-        const val FILE = "kotlinsharedpreferences"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -62,24 +60,20 @@ class RegisterActivity : AppCompatActivity() {
         val username = binding.etUsername.text.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
-        val repassword = binding.etRepassword.text.toString()
-        val obejctUser = User(null, username, email, password, repassword,null,null,null)
-        val preferences = this.getSharedPreferences(FILE, Context.MODE_PRIVATE)
+        val obejctUser = User(null, username, email, password,null,"no_image")
 
         lifecycleScope.launch(Dispatchers.IO) {
             val result = dB?.user()?.insertUser(obejctUser)
             runBlocking(Dispatchers.Main) {
                 if (result != 0.toLong()) {
-                    val editor: SharedPreferences.Editor = preferences.edit()
-                    editor.putString("email", email)
-                    editor.putString("username",username)
-                    editor.apply()
+
                     Toast.makeText(
                         this@RegisterActivity,
                         "Success add ${obejctUser.username}",
                         Toast.LENGTH_SHORT
                     )
                         .show()
+
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                 } else {
                     Toast.makeText(

@@ -15,8 +15,8 @@ interface UserDao {
     @Insert(onConflict = REPLACE)
     fun insertUser (user: User) :Long
 
-    @Query ("SELECT EXISTS(SELECT*FROM User WHERE email = :email AND password = :password)")
-    fun checkUser(email:String,password :String):Boolean
+    @Query ("SELECT*FROM User WHERE email = :email AND password = :password")
+    fun checkUser(email:String,password :String):User
 
     @Update
     fun updateUser(user: User):Int

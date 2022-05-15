@@ -26,6 +26,14 @@
             android:textColor="@color/white"
             android:text="@string/welcome_username"
             android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/iv_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_baseline_favorite_24" />
+
 
         <ImageView
             android:id="@+id/iv_user"

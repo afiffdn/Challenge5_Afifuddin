@@ -58,21 +58,31 @@
 
             <TextView
                 android:id="@+id/tv_judul"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:text="@string/judul_film"
                 android:textStyle="bold"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tahun"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/_2000"
                 android:textSize="17sp" />
 
         </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_favorite_border_24"/>
 
         <TextView
             android:id="@+id/isi_overview"
