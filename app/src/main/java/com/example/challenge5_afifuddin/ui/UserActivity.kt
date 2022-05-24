@@ -1,4 +1,4 @@
-package com.example.challenge5_afifuddin
+package com.example.challenge5_afifuddin.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityUserBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
-import com.example.challenge5_afifuddin.login.database_login.Database
-import com.example.challenge5_afifuddin.login.database_login.User
+import com.example.challenge5_afifuddin.room.Database
+import com.example.challenge5_afifuddin.model.User
 import com.example.challenge5_afifuddin.viewmodel.MainViewModel
 import com.example.challenge5_afifuddin.viewmodel.ProfilViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker

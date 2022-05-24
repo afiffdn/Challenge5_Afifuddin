@@ -1,21 +1,19 @@
-package com.example.challenge5_afifuddin
+package com.example.challenge5_afifuddin.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.challenge5_afifuddin.R
 import com.example.challenge5_afifuddin.adapter.NowMovieShowingAdapter
 import com.example.challenge5_afifuddin.adapter.TopRatedAdapter
-import com.example.challenge5_afifuddin.api.ApiClient
+import com.example.challenge5_afifuddin.service.ApiClient
 import com.example.challenge5_afifuddin.databinding.ActivityMainBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
-import com.example.challenge5_afifuddin.login.database_login.Database
+import com.example.challenge5_afifuddin.room.Database
 import com.example.challenge5_afifuddin.model_movies_now_showing.GetAllMovieNowShowing
-import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 import com.example.challenge5_afifuddin.model_movies_top_rated.GetTopRated
 import com.example.challenge5_afifuddin.viewmodel.MainViewModel
 import com.example.challenge5_afifuddin.viewmodel.ViewModelFactory

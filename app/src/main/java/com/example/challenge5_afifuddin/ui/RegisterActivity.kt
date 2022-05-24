@@ -1,16 +1,13 @@
-package com.example.challenge5_afifuddin
+package com.example.challenge5_afifuddin.ui
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityRegisterBinding
-import com.example.challenge5_afifuddin.datastore.DatastoreManager
-import com.example.challenge5_afifuddin.login.database_login.Database
-import com.example.challenge5_afifuddin.login.database_login.User
+import com.example.challenge5_afifuddin.room.Database
+import com.example.challenge5_afifuddin.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

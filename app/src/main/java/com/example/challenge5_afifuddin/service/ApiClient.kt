@@ -1,4 +1,4 @@
-package com.example.challenge5_afifuddin.api
+package com.example.challenge5_afifuddin.service
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

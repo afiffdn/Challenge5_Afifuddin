@@ -1,4 +1,4 @@
-//package com.example.challenge5_afifuddin
+package com.example.challenge5_afifuddin.ui//package com.example.challenge5_afifuddin
 //
 //import android.content.Context
 //import android.content.Intent

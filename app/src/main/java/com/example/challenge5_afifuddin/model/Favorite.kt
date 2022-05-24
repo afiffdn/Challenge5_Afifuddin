@@ -1,4 +1,4 @@
-package com.example.challenge5_afifuddin.favorite
+package com.example.challenge5_afifuddin.model
 
 import android.os.Parcelable
 import androidx.room.Entity

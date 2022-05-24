@@ -1,4 +1,4 @@
-package com.example.challenge5_afifuddin
+package com.example.challenge5_afifuddin.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,18 +7,19 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.example.challenge5_afifuddin.R
 import com.example.challenge5_afifuddin.databinding.ActivityDetailBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
-import com.example.challenge5_afifuddin.favorite.Favorite
-import com.example.challenge5_afifuddin.login.database_login.Database
-import com.example.challenge5_afifuddin.viewmodel.GetDetailViewModel
+import com.example.challenge5_afifuddin.model.Favorite
+import com.example.challenge5_afifuddin.room.Database
+import com.example.challenge5_afifuddin.viewmodel.DetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class DetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailBinding
-    private lateinit var viewModel: GetDetailViewModel
+    private lateinit var viewModel: DetailViewModel
     private var dB: Database? = null
     private lateinit var datastore: DatastoreManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra("id", 0)
         Log.d("tesIntent", id.toString())
-        viewModel = ViewModelProvider(this).get(GetDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         viewModel.getDetails(id)
         viewModel.movieDetail.observe(this) { data ->
             binding.apply {

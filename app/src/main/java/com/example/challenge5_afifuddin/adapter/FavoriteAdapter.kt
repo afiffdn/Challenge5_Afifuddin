@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.challenge5_afifuddin.databinding.ActivityItemBinding
-import com.example.challenge5_afifuddin.favorite.Favorite
+import com.example.challenge5_afifuddin.model.Favorite
 
 class FavoriteAdapter(private val onItemClick: OnClickListener): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     private val diffCallBack = object : DiffUtil.ItemCallback<Favorite>(){

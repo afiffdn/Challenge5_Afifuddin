@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
-import com.example.challenge5_afifuddin.login.database_login.User
+import com.example.challenge5_afifuddin.model.User
 
 class MainViewModel(private val datastore:DatastoreManager) : ViewModel() {
 

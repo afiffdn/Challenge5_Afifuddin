@@ -1,4 +1,4 @@
-package com.example.challenge5_afifuddin.api
+package com.example.challenge5_afifuddin.service
 
 import com.example.challenge5_afifuddin.model_movies_now_showing.GetAllMovieNowShowing
 import com.example.challenge5_afifuddin.model_movies_now_showing.Result

@@ -1,10 +1,11 @@
-package com.example.challenge5_afifuddin.login.database_login
+package com.example.challenge5_afifuddin.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.Update
+import com.example.challenge5_afifuddin.model.User
 
 
 @Dao
@@ -16,7 +17,7 @@ interface UserDao {
     fun insertUser (user: User) :Long
 
     @Query ("SELECT*FROM User WHERE email = :email AND password = :password")
-    fun checkUser(email:String,password :String):User
+    fun checkUser(email:String,password :String): User
 
     @Update
     fun updateUser(user: User):Int

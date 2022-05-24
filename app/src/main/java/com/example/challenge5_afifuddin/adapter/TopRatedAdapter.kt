@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.challenge5_afifuddin.databinding.ActivityItemBinding
-import com.example.challenge5_afifuddin.model_movies_top_rated.Result
 
 class TopRatedAdapter(private val onItemClick: OnClickListener):
     RecyclerView.Adapter<TopRatedAdapter.ViewHolder>() {

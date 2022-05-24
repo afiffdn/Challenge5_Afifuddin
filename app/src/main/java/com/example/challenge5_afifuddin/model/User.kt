@@ -1,4 +1,4 @@
-package com.example.challenge5_afifuddin.login.database_login
+package com.example.challenge5_afifuddin.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

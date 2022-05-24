@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.challenge5_afifuddin.login.database_login.User
+import com.example.challenge5_afifuddin.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

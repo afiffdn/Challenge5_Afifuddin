@@ -1,6 +1,7 @@
-package com.example.challenge5_afifuddin.favorite
+package com.example.challenge5_afifuddin.room.dao
 
 import androidx.room.*
+import com.example.challenge5_afifuddin.model.Favorite
 
 
 @Dao
