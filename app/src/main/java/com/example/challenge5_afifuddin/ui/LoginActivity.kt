@@ -22,10 +22,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        dB = Database.getInstance(this)
         datastore = DatastoreManager(this)
         viewmodel = ViewModelProvider(this,ViewModelFactory(datastore))[MainViewModel::class.java]
-
 
         viewmodel.apply {
             getData().observe(this@LoginActivity){

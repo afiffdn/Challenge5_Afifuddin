@@ -101,7 +101,6 @@ class UserActivity : AppCompatActivity() {
     }
     @SuppressLint("CommitPrefEdits")
     private fun fetchData() {
-        dB = Database.getInstance(this)
         profileViewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
         var id = 1
         profileViewModel.userData.observe(this) {

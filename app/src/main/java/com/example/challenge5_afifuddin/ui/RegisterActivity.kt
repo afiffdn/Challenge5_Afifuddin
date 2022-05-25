@@ -1,22 +1,18 @@
 package com.example.challenge5_afifuddin.ui
 
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityRegisterBinding
-import com.example.challenge5_afifuddin.room.Database
 import com.example.challenge5_afifuddin.model.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.example.challenge5_afifuddin.viewmodel.RegisterViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var binding:ActivityRegisterBinding
-    var dB: Database? = null
-
-
+    private val viewModel : RegisterViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -45,42 +41,15 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "wrong repassword", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    register()
+                    val obejctUser = User(null, username, email, password,null,"no_image")
+                    viewModel.insertUser(obejctUser)
+                    Toast.makeText(this, "sukses add ${username}", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this,LoginActivity::class.java))
+
                 }
             }
 
         }
     }
 
-    private fun register() {
-        dB = Database.getInstance(this)
-        val username = binding.etUsername.text.toString()
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
-        val obejctUser = User(null, username, email, password,null,"no_image")
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            val result = dB?.user()?.insertUser(obejctUser)
-            runBlocking(Dispatchers.Main) {
-                if (result != 0.toLong()) {
-
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Success add ${obejctUser.username}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-
-                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                } else {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "failed add ${obejctUser.username}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-            }
-        }
-    }
 }

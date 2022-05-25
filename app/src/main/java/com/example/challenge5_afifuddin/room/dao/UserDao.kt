@@ -14,7 +14,7 @@ interface UserDao {
     fun getAllUser(): List<User>
 
     @Insert(onConflict = REPLACE)
-    fun insertUser (user: User) :Long
+    suspend fun insertUser (user: User)
 
     @Query ("SELECT*FROM User WHERE email = :email AND password = :password")
     fun checkUser(email:String,password :String): User

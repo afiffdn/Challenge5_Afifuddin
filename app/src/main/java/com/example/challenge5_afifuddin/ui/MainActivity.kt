@@ -14,6 +14,7 @@ import com.example.challenge5_afifuddin.databinding.ActivityMainBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
 import com.example.challenge5_afifuddin.room.Database
 import com.example.challenge5_afifuddin.model_movies_now_showing.GetAllMovieNowShowing
+import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 import com.example.challenge5_afifuddin.model_movies_top_rated.GetTopRated
 import com.example.challenge5_afifuddin.viewmodel.MainViewModel
 import com.example.challenge5_afifuddin.viewmodel.ViewModelFactory
@@ -34,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         datastore = DatastoreManager(this)
         mainViewModel = ViewModelProvider(this, ViewModelFactory(datastore))[MainViewModel::class.java]
-        dB = Database.getInstance(this)
         mainViewModel.getData().observe(this){
             binding.tvWelcome.text = getString(R.string.welcome_username, it.username)
         }

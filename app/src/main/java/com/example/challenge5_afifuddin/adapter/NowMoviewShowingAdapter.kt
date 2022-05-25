@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.challenge5_afifuddin.databinding.ActivityItemBinding
+import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 
 class NowMovieShowingAdapter(private val onItemCLick: onClickListener) :
     RecyclerView.Adapter<NowMovieShowingAdapter.ViewHolder>() {
