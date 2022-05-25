@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.challenge5_afifuddin.R
 import com.example.challenge5_afifuddin.adapter.NowMovieShowingAdapter
 import com.example.challenge5_afifuddin.adapter.TopRatedAdapter
-import com.example.challenge5_afifuddin.service.ApiClient
 import com.example.challenge5_afifuddin.databinding.ActivityMainBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
 import com.example.challenge5_afifuddin.room.Database
@@ -18,6 +17,7 @@ import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 import com.example.challenge5_afifuddin.model_movies_top_rated.GetTopRated
 import com.example.challenge5_afifuddin.viewmodel.MainViewModel
 import com.example.challenge5_afifuddin.viewmodel.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,19 +25,17 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var dB: Database? = null
-    lateinit var mainViewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel()
     lateinit var datastore: DatastoreManager
+    private lateinit var nowshowingadapter : NowMovieShowingAdapter
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        datastore = DatastoreManager(this)
-        mainViewModel = ViewModelProvider(this, ViewModelFactory(datastore))[MainViewModel::class.java]
-        mainViewModel.getData().observe(this){
-            binding.tvWelcome.text = getString(R.string.welcome_username, it.username)
-        }
+//        datastore = DatastoreManager(this)
+//        mainViewModel = ViewModelProvider(this, ViewModelFactory(datastore))[MainViewModel::class.java]
 
         //   mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         //   dB = Database.getInstance(this)
@@ -101,6 +99,8 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     private fun fetchDataAllNowPlaying() {
+
+
         ApiClient.instance.getAllNowPlaying()
             .enqueue(object : Callback<GetAllMovieNowShowing> {
                 override fun onResponse(

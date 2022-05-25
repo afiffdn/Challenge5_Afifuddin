@@ -9,37 +9,37 @@ import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityLoginBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
 import com.example.challenge5_afifuddin.room.Database
+import com.example.challenge5_afifuddin.viewmodel.LoginViewModel
 import com.example.challenge5_afifuddin.viewmodel.MainViewModel
 import com.example.challenge5_afifuddin.viewmodel.ViewModelFactory
 import kotlinx.coroutines.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     private var dB: Database? = null
     lateinit var datastore: DatastoreManager
-    lateinit var viewmodel : MainViewModel
+    private val viewmodel : LoginViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        datastore = DatastoreManager(this)
-        viewmodel = ViewModelProvider(this,ViewModelFactory(datastore))[MainViewModel::class.java]
+//        datastore = DatastoreManager(this)
+//        viewmodel = ViewModelProvider(this,ViewModelFactory(datastore))[MainViewModel::class.java]
 
-        viewmodel.apply {
-            getData().observe(this@LoginActivity){
-                if (it.id_user != -1)
-                {
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                }
-            }
-        }
+//        viewmodel.apply {
+//            getData().observe(this@LoginActivity){
+//                if (it.id_user != -1)
+//                {
+//                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+//                }
+//            }
+//        }
 
         binding.btnLogin.setOnClickListener {
             checkLogin()
 
         }
-
-
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -60,27 +60,8 @@ class LoginActivity : AppCompatActivity() {
                     binding.etPassword.error = "Input Password"
                 }
                 else -> {
-                    chechUser()
-                }
-            }
-        }
-    }
-
-    private fun chechUser() {
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            val login = dB?.user()?.checkUser(email, password)
-            runBlocking(Dispatchers.Main) {
-                if (login != null) {
-                    viewmodel.setDataUser(login)
-                    Toast.makeText(this@LoginActivity, "Login Sukses", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-
-                } else {
-                    Toast.makeText(this@LoginActivity, "gagal login", Toast.LENGTH_SHORT)
-                        .show()
+                    viewmodel.checkUser(email,password)
+                    startActivity(Intent(this@LoginActivity,MainActivity::class.java))
                 }
             }
         }

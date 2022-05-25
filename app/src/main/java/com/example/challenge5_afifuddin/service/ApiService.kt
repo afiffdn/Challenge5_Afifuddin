@@ -9,11 +9,11 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("movie/now_playing")
-    fun getAllNowPlaying(@Query ("api_key") apiKey:String = ApiClient.API_KEY  ): retrofit2.Call<GetAllMovieNowShowing>
+    suspend fun getAllNowShowing(): List<GetAllMovieNowShowing>
 
     @GET("movie/{movie_id}")
-    fun getDetails(@Path("movie_id") movieId:Int, @Query("api_key") apiKey: String = ApiClient.API_KEY  ) : retrofit2.Call<Result>
+    suspend fun getDetails(@Path("movie_id") movieId:Int ) : List<Result>
 
     @GET("movie/top_rated")
-    fun getTopRated(@Query("api_key") apiKey: String = ApiClient.API_KEY):retrofit2.Call<GetTopRated>
+    suspend fun getTopRated():List<GetTopRated>
 }

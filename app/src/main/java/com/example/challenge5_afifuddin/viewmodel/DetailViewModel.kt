@@ -3,7 +3,6 @@ package com.example.challenge5_afifuddin.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.challenge5_afifuddin.service.ApiClient
 import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 import retrofit2.Call
 import retrofit2.Callback
