@@ -13,16 +13,16 @@ class DetailViewModel :ViewModel() {
     val movieDetail :MutableLiveData<Result> = MutableLiveData()
 
     fun getDetails(id :Int){
-        ApiClient.instance.getDetails(movieId = id)
-            .enqueue(object : Callback<Result>{
-                override fun onResponse(call: Call<Result>, response: Response<Result>) {
-            movieDetail.postValue(response.body())
-                }
-
-                override fun onFailure(call: Call<Result>, t: Throwable) {
-                    Log.d("getDetail","${t.message}")
-                }
-            })
+//        ApiClient.instance.getDetails(movieId = id)
+//            .enqueue(object : Callback<Result>{
+//                override fun onResponse(call: Call<Result>, response: Response<Result>) {
+//            movieDetail.postValue(response.body())
+//                }
+//
+//                override fun onFailure(call: Call<Result>, t: Throwable) {
+//                    Log.d("getDetail","${t.message}")
+//                }
+//            })
     }
 
 

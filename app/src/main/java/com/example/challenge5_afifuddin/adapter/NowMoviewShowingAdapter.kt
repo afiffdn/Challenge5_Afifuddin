@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.challenge5_afifuddin.databinding.ActivityItemBinding
+import com.example.challenge5_afifuddin.model_movies_now_showing.GetAllMovieNowShowing
 import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 
 class NowMovieShowingAdapter(private val onItemCLick: onClickListener) :
@@ -24,7 +25,7 @@ class NowMovieShowingAdapter(private val onItemCLick: onClickListener) :
     }
     private val differ = AsyncListDiffer(this, diffCallBack)
 
-    fun submitData(value: List<Result>) = differ.submitList(value)
+    fun submitData(value: List<Result>?) = differ.submitList(value)
     override fun onCreateViewHolder(parent: ViewGroup, viewtype: Int): NowMovieShowingAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(ActivityItemBinding.inflate(inflater, parent, false))

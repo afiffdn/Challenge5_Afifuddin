@@ -16,7 +16,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 val networkModule = module {
     single {
-        // okhttp client
+        ChuckerInterceptor.Builder(androidContext())
+            .collector(ChuckerCollector(androidContext()))
+            .maxContentLength(250000L)
+            .redactHeaders(emptySet())
+            .alwaysReadResponseBody(false)
+            .build()
+    }
+    single {
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val original = chain.request()
@@ -27,19 +34,6 @@ val networkModule = module {
                 val request = original.newBuilder().url(url).build()
                 chain.proceed(request)
             }
-            .build()
-    }
-    single {
-        ChuckerInterceptor.Builder(androidContext())
-            .collector(ChuckerCollector(androidContext()))
-            .maxContentLength(250000L)
-            .redactHeaders(emptySet())
-            .alwaysReadResponseBody(false)
-            .build()
-    }
-    single {
-        OkHttpClient.Builder()
-            .addInterceptor(get<HttpLoggingInterceptor>())
             .addInterceptor(get<ChuckerInterceptor>())
             .build()
     }

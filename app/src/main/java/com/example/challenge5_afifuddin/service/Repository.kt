@@ -12,4 +12,5 @@ class Repository(
     suspend fun check(email:String, password:String) : User =dbHelper.check(email,password)
     //api
     suspend fun getAllMovieNowShowing() = apiService.getAllNowShowing()
+    suspend fun getTopRated() = apiService.getTopRated()
 }

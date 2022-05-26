@@ -10,9 +10,6 @@ import com.example.challenge5_afifuddin.databinding.ActivityLoginBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
 import com.example.challenge5_afifuddin.room.Database
 import com.example.challenge5_afifuddin.viewmodel.LoginViewModel
-import com.example.challenge5_afifuddin.viewmodel.MainViewModel
-import com.example.challenge5_afifuddin.viewmodel.ViewModelFactory
-import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
