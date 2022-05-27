@@ -7,6 +7,7 @@ import com.example.challenge5_afifuddin.model_movies_now_showing.GetAllMovieNowS
 import com.example.challenge5_afifuddin.model_movies_top_rated.GetTopRated
 import com.example.challenge5_afifuddin.service.Repository
 import com.example.challenge5_afifuddin.service.Resource
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
@@ -17,6 +18,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private val _datatop = MutableLiveData<Resource<GetTopRated>>()
     val datatop: LiveData<Resource<GetTopRated>>
         get() = _datatop
+
+    private val _userPref = MutableLiveData<User>()
+    val userPref :LiveData<User> get() =_userPref
 
     fun getAllMovieNowShowing() {
         viewModelScope.launch {
@@ -36,6 +40,14 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                 _datatop.postValue(Resource.success(repository.getTopRated()))
             } catch (exception: Exception) {
                 _datatop.postValue(Resource.error(exception.message ?: "Error"))
+            }
+        }
+    }
+
+    fun getUserPref(){
+        viewModelScope.launch {
+            repository.getUserPref().collect(){
+            _userPref.postValue(it)
             }
         }
     }

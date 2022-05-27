@@ -20,9 +20,16 @@ class DatastoreManager(private val context: Context) {
         private val NAMA = stringPreferencesKey("nama_key")
         private val IMAGE_KEY = stringPreferencesKey("image_key")
         private val Context.datastore by preferencesDataStore(name = DATASTORELOGIN)
+
+        const val DEF_ID = -1
+        const val DEF_NAMA = "default_nama"
+        const val DEF_EMAIL = "default_email@gmail.com"
+        const val DEF_USERNAME = "default_username"
+        const val DEF_PASSWORD = "default_password"
+        const val DEF_IMAGE = "no_image"
     }
 
-    suspend fun save(userData: User) {
+    suspend fun saveUser(userData: User) {
         context.datastore.edit {
             it[ID] = userData.id_user!!.toInt()
             it[USERNAME] = userData.username.toString()
@@ -33,15 +40,15 @@ class DatastoreManager(private val context: Context) {
         }
     }
 
-    fun getUser(): Flow<User> {
+   fun getUser(): Flow<User> {
         return context.datastore.data.map {
             User(
-                it[ID] ?: -1,
-                it[USERNAME] ?: "default_username",
-                it[EMAIL] ?: "default_email",
-                it[PASSWORD] ?: "default_password",
-                it[NAMA] ?: "default_nama",
-                 it[IMAGE_KEY] ?: "no_image"
+                it[ID] ?: DEF_ID,
+                it[USERNAME] ?: DEF_USERNAME,
+                it[EMAIL] ?: DEF_EMAIL,
+                it[PASSWORD] ?: DEF_PASSWORD,
+                it[NAMA] ?: DEF_NAMA,
+                 it[IMAGE_KEY] ?: DEF_IMAGE
             )
         }
     }

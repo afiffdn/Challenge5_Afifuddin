@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityLoginBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
+import com.example.challenge5_afifuddin.datastore.DatastoreManager.Companion.DEF_EMAIL
+import com.example.challenge5_afifuddin.datastore.DatastoreManager.Companion.DEF_ID
 import com.example.challenge5_afifuddin.room.Database
 import com.example.challenge5_afifuddin.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,17 +23,17 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        datastore = DatastoreManager(this)
-//        viewmodel = ViewModelProvider(this,ViewModelFactory(datastore))[MainViewModel::class.java]
 
-//        viewmodel.apply {
-//            getData().observe(this@LoginActivity){
-//                if (it.id_user != -1)
-//                {
-//                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-//                }
-//            }
-//        }
+        viewmodel.getUserPref()
+        viewmodel.userPref.observe(this){
+            if (it.id_user != DEF_ID){
+                startActivity(Intent(this, MainActivity ::class.java))
+            }else if (it.email != DEF_EMAIL){
+                binding.etEmail.setText(it.email)
+            }else{
+                Toast.makeText(this, "welcome to dbmovie app", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         binding.btnLogin.setOnClickListener {
             checkLogin()
@@ -58,7 +60,15 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else -> {
                     viewmodel.checkUser(email,password)
-                    startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                    viewmodel.user.observe(this@LoginActivity){
+                        if (it == null){
+                            binding.tilUsername.error = "Username atau password salah"
+                        }else{
+                            viewmodel.saveUserPref(it)
+                            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                        }
+                    }
+
                 }
             }
         }

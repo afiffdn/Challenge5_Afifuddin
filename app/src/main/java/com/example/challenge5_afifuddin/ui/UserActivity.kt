@@ -1,6 +1,5 @@
 package com.example.challenge5_afifuddin.ui
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -9,26 +8,22 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.challenge5_afifuddin.databinding.ActivityUserBinding
 import com.example.challenge5_afifuddin.datastore.DatastoreManager
-import com.example.challenge5_afifuddin.room.Database
+import com.example.challenge5_afifuddin.datastore.DatastoreManager.Companion.DEF_ID
+import com.example.challenge5_afifuddin.datastore.DatastoreManager.Companion.DEF_IMAGE
 import com.example.challenge5_afifuddin.model.User
-import com.example.challenge5_afifuddin.viewmodel.MainViewModel
 import com.example.challenge5_afifuddin.viewmodel.ProfilViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
 class UserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserBinding
-    private var dB: Database? = null
-    private lateinit var profileViewModel: ProfilViewModel
-    private lateinit var datastore: DatastoreManager
-    private lateinit var viewmodel: MainViewModel
+    private var id: Int = DEF_ID
+    private var uri = DEF_IMAGE
+    private val viewmodel: ProfilViewModel by viewModel()
 
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -58,20 +53,52 @@ class UserActivity : AppCompatActivity() {
         binding = ActivityUserBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        datastore = DatastoreManager(this)
         fetchData()
 
         binding.btnImage.setOnClickListener {
-                openGalerry()
+            openGalerry()
         }
 
         binding.btnLogout.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                datastore.delete()
-            }
+            viewmodel.deleteUserPref()
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
+        binding.btnUpdate.setOnClickListener {
+            updateData()
+        }
+        binding.btnBack.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
+
+    }
+
+    private fun updateData() {
+        binding.apply {
+            when {
+                etEditEmail.text.toString().isEmpty() ||
+                        etEditPassword.text.toString().isEmpty() ||
+                        etEditUsername.text.toString().isEmpty() ||
+                        etEditNamaLengkap.text.toString().isEmpty() -> {
+                    Toast.makeText(this@UserActivity, "Tidak boleh kosong", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                else -> {
+                    val user = User(
+                        id,
+                        etEditUsername.text.toString(),
+                        etEditEmail.text.toString(),
+                        etEditPassword.text.toString(),
+                        etEditNamaLengkap.text.toString(),
+                        uri
+                    )
+                    viewmodel.setUserPref(user)
+                    viewmodel.updataUser(user)
+                    Toast.makeText(this@UserActivity, "Suksek mengupdate data", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
     }
 
     private fun openGalerry() {
@@ -99,58 +126,23 @@ class UserActivity : AppCompatActivity() {
         }
 
     }
-    @SuppressLint("CommitPrefEdits")
+
     private fun fetchData() {
-        profileViewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
-        var id = 1
-        profileViewModel.userData.observe(this) {
-            id = it.id_user!!
-            binding.etEditUsername.setText(it.username)
-            binding.etEditEmail.setText(it.email)
-            binding.etEditPassword.setText(it.password)
-            binding.etEditNamaLengkap.setText(it.namaLengkap)
-        }
-        binding.btnUpdate.setOnClickListener {
-            when {
-                binding.etEditNamaLengkap.text.toString().isEmpty() ||
-                        binding.etEditUsername.text.toString().isEmpty() ||
-                        binding.etEditEmail.text.toString().isEmpty() ||
-                        binding.etEditPassword.text.toString().isEmpty() -> {
-                    Toast.makeText(this, "incomplete!", Toast.LENGTH_SHORT)
-                        .show()
+        viewmodel.getDataPref()
+        viewmodel.userDataPref.observe(this) {
+            if (it != null) {
+                id = it.id_user!!
+                binding.apply {
+                    etEditEmail.setText(it.email)
+                    etEditPassword.setText(it.password)
+                    etEditNamaLengkap.setText(it.namaLengkap)
+                    etEditUsername.setText(it.username)
                 }
-                else -> {
-                    val user = User(
-                        id,
-                        binding.etEditUsername.text.toString(),
-                        binding.etEditEmail.text.toString(),
-                        binding.etEditPassword.text.toString(),
-                        binding.etEditNamaLengkap.text.toString(),
-                        "no_image"
-                    )
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val result = dB?.user()?.updateUser(user)
-                        runBlocking(Dispatchers.Main) {
-                            if (result != 0) {
-                                Toast.makeText(
-                                    this@UserActivity,
-                                    "Data ${binding.etEditNamaLengkap.text} Berhasil Disimpan ",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                startActivity(Intent(this@UserActivity, MainActivity::class.java))
-                            } else {
-                                Toast.makeText(
-                                    this@UserActivity,
-                                    "Data Gagal Disimpan",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                    }
+                if (it.image != DEF_IMAGE) {
+                    uri = it.image
+                    loadImage(Uri.parse(it.image))
                 }
             }
         }
-
-
     }
 }

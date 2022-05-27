@@ -10,10 +10,6 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("movie/now_playing")
     suspend fun getAllNowShowing(): GetAllMovieNowShowing
-
-    @GET("movie/{movie_id}")
-    suspend fun getDetails(@Path("movie_id") movieId:Int ) : Result
-
     @GET("movie/top_rated")
     suspend fun getTopRated():GetTopRated
 }
