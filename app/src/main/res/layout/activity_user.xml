@@ -4,7 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserActivity">
+    tools:context=".ui.UserActivity">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="32dp"/>
     <TextView
         android:id="@+id/tv_detail"
         android:layout_width="wrap_content"
@@ -17,63 +26,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ll"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_detail">
 
+        <ImageView
+            android:id="@+id/btn_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_baseline_person_add_24"
+            android:layout_gravity="center"/>
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_edit_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:hint="@string/username_profile">
-        </com.google.android.material.textfield.TextInputEditText>
+            android:hint="@string/username_profile" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_edit_nama_lengkap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:hint="@string/full_name">
-        </com.google.android.material.textfield.TextInputEditText>
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_Tanggal_lahir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:hint="@string/date_of_birth">
-        </com.google.android.material.textfield.TextInputEditText>
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_edit_alamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:hint="@string/address">
-        </com.google.android.material.textfield.TextInputEditText>
+            android:hint="@string/full_name" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:hint="@string/new_email">
-        </com.google.android.material.textfield.TextInputEditText>
+            android:hint="@string/new_email" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:hint="@string/new_password">
-        </com.google.android.material.textfield.TextInputEditText>
+            android:hint="@string/new_password" />
 
 
     </LinearLayout>

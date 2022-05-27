@@ -7,28 +7,28 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.challenge5_afifuddin.databinding.ActivityItemBinding
-import com.example.challenge5_afifuddin.model_movies_top_rated.Result
+import com.example.challenge5_afifuddin.model_movies_now_showing.Result
 
 class TopRatedAdapter(private val onItemClick: OnClickListener):
     RecyclerView.Adapter<TopRatedAdapter.ViewHolder>() {
 
     private val IMAGE_BASE ="https://image.tmdb.org/t/p/w500/"
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<Result>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<com.example.challenge5_afifuddin.model_movies_top_rated.Result>(){
         override fun areItemsTheSame(
-            oldItem: Result,
-            newItem: Result
+            oldItem:com.example.challenge5_afifuddin.model_movies_top_rated.Result,
+            newItem: com.example.challenge5_afifuddin.model_movies_top_rated.Result
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: Result,
-            newItem: Result
+            oldItem: com.example.challenge5_afifuddin.model_movies_top_rated.Result,
+            newItem: com.example.challenge5_afifuddin.model_movies_top_rated.Result
         ): Boolean = oldItem.hashCode() == newItem.hashCode()
     }
 
     private val differ = AsyncListDiffer(this, diffCallBack)
 
-    fun submitData(value: List<Result>) = differ.submitList(value)
+    fun submitData(value: List<com.example.challenge5_afifuddin.model_movies_top_rated.Result>) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -44,7 +44,7 @@ class TopRatedAdapter(private val onItemClick: OnClickListener):
 
     inner class ViewHolder(private val binding: ActivityItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Result) {
+        fun bind(data: com.example.challenge5_afifuddin.model_movies_top_rated.Result) {
             binding.apply {
                 Glide.with(binding.root).load(IMAGE_BASE+data.posterPath).into(ivListMovie)
                 tvJudul.text = data.originalTitle
@@ -56,7 +56,7 @@ class TopRatedAdapter(private val onItemClick: OnClickListener):
         }
     }
     interface OnClickListener{
-        fun onClickItem(data: Result)
+        fun onClickItem(data: com.example.challenge5_afifuddin.model_movies_top_rated.Result)
     }
 
 }
