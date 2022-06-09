@@ -15,17 +15,17 @@
         <activity
             android:name=".ui.FavoriteActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".SplashActivity"-->
-<!--            android:exported="false">-->
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true">
 
-<!--            &lt;!&ndash; <intent-filter> &ndash;&gt;-->
-<!--            &lt;!&ndash; <action android:name="android.intent.action.MAIN" /> &ndash;&gt;-->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
 
-<!--            &lt;!&ndash; <category android:name="android.intent.category.LAUNCHER" /> &ndash;&gt;-->
-<!--            &lt;!&ndash; </intent-filter> &ndash;&gt;-->
-<!--        </activity>-->
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+        </activity>
         <activity
             android:name=".ui.UserActivity"
             android:exported="false" />
@@ -34,18 +34,25 @@
             android:exported="false" />
         <activity
             android:name=".ui.RegisterActivity"
-            android:exported="false" />
+            android:exported="false" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
