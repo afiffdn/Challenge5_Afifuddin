@@ -56,6 +56,8 @@ class RegisterActivity : ComponentActivity() {
         }
     }
 
+    // tes ci
+
     @Composable
 
     fun Register() {
